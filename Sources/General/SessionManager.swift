@@ -313,15 +313,16 @@ extension SessionManager {
                 task = fetchTask(validURL)
                 if let task = task {
                     task.cancel()
-                    task = DownloadTask(validURL,
-                                        headers: headers,
-                                        fileName: fileName,
-                                        cache: cache,
-                                        operationQueue: operationQueue)
-                    task.manager = self
-                    task.session = session
-                    maintainTasks(with: .append(task))
                 }
+
+                task = DownloadTask(validURL,
+                                    headers: headers,
+                                    fileName: fileName,
+                                    cache: cache,
+                                    operationQueue: operationQueue)
+                task.manager = self
+                task.session = session
+                maintainTasks(with: .append(task))
                 storeTasks()
                 start(task, onMainQueue: onMainQueue, handler: handler)
             }
