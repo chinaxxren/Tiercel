@@ -312,8 +312,7 @@ extension SessionManager {
             operationQueue.sync {
                 task = fetchTask(validURL)
                 if let task = task {
-                    task.update(headers, newFileName: fileName)
-                } else {
+                    task.cancel()
                     task = DownloadTask(validURL,
                                         headers: headers,
                                         fileName: fileName,
